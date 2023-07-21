@@ -122,21 +122,21 @@ def get_legal_word(sen,LEG):
 
 def compute_summary(args):
 
-    ifname = args.prep_path
-    SUMMARY_PATH = args.summary_path
-    CLASS_WEIGHT = args.class_weights
-    nos = args.class_sents
+    ifname = args.prep_path # ifname will contains path for converted json file. 
+    SUMMARY_PATH = args.summary_path # where we need to store actual summary
+    CLASS_WEIGHT = args.class_weights # F=2 I=3 RLC=1 A=1 P=1 S=1 R=2 RPC=3. Before converting to json the judgement need to be tagged with class weights. 
+    nos = args.class_sents  # Minimum number of sentences to be taken from each rhetorical segment
     
-    with open(ifname,'r') as fp:
-        dic = json.load(fp)
+    with open(ifname,'r') as fp: 
+        dic = json.load(fp)  # open converted json file
 
     for k,v in CLASS_WEIGHT.items():
-        print('Weight for class {} is {}'.format(k,v))
+        print('Weight for class {} is {}'.format(k,v)) # printing class weights
 
-    print('Total number of documents:{}'.format(len(dic.keys())))
+    print('Total number of documents:{}'.format(len(dic.keys())))  # total number of json files. 
        
-    SUMMARY_LENGTH = {}
-    fp = open(args.length_file,'r')
+    SUMMARY_LENGTH = {} # This is magic of length file. this file contains map of file name and summary length. 
+    fp = open(args.length_file,'r') # for the given summary length file will be created of same length. 
     for l in fp:
         wl = l.split('\t')
         docid = wl[0].strip(' \t\n\r')
@@ -146,13 +146,13 @@ def compute_summary(args):
     fp.close()
 
     
-    LEGALDICT = {}
-    fp = open('dict_words.txt','r')
+    LEGALDICT = {} # below loop will create a dictionary Legaldict with key is word and value is 1. 
+    fp = open('dict_words.txt','r') # for all word value will be set to 1.
     for l in fp:
         LEGALDICT[l.strip(' \t\n\r').lower()] = 1
     fp.close()
 
-    for k,v in dic.items():
+    for k,v in dic.items(): # here dic is the dictionary where converted json is stored.
         print('Document ID {}'.format(k))
         t0 = time.time()
         T = {}
@@ -482,7 +482,7 @@ def numToWord(number):
             word.pop(i)
     return ' '.join(word[::-1])
 
-def main():
+def main(): # entry point to code execution.
     
     parser = argparse.ArgumentParser()
     parser.add_argument('--prep_path',  type = str, help = 'Path where the prepared data is stored in json format')
