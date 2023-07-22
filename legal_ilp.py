@@ -5,7 +5,7 @@ Created on Thu May  6 10:53:48 2021
 @author: Paheli
 """
 # Command to run below code - 
-# --prep_path /Users/suhit-k/MS_PhD_Admission/Law_AI/DELSumm/outprepared_data.json --summary_path /Users/suhit-k/MS_PhD_Admission/Law_AI/DELSumm/summary --length_file length_file.txt --class_weights F=2 I=3 RLC=1 A=1 P=1 S=1 R=2 RPC=3 --default_sents 1 --content_weight 1 --legal_weight 1 --statute_weight 2
+# --prep_path --prep_path /Users/suhit-k/MS_PhD_Admission/myrepo/LegalDocSum-Extractive/outprepared_data.json --summary_path /Users/suhit-k/MS_PhD_Admission/myrepo/LegalDocSum-Extractive/summary --length_file length_file.txt --class_weights F=2 I=3 RLC=1 A=1 P=1 S=1 R=2 RPC=3 --default_sents 1 --content_weight 1 --legal_weight 1 --statute_weight 2
 
 # Class weights  
 # F=2 I=3 RLC=1 A=1 P=1 S=1 R=2 RPC=3
@@ -164,13 +164,13 @@ def compute_summary(args):
         NOS = {}
         MAP = {}
         #Ts = SUMMARY_LENGTH[k][1] #word limit
-        Ts = SUMMARY_LENGTH[k]
+        Ts = SUMMARY_LENGTH[k] # name of file with summary length. 
         #Ts = 2000
         print('Summary Length: {}'.format(Ts))
         
         for ck,cv in v.items():
-            CL_WEIGHT = CLASS_WEIGHT[ck]
-            NUMBER_OF_SENTENCES = 0
+            CL_WEIGHT = CLASS_WEIGHT[ck] #extract class weight
+            NUMBER_OF_SENTENCES = 0 
             LENGTH_SEGMENT = 0
             for x in cv:
                 #get_statute_mention(x[0].strip(' \t\n\r'))
