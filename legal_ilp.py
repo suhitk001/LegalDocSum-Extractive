@@ -112,8 +112,8 @@ POS_TAGS = ['CC','CD','DT','EX','FW','IN','JJ','JJR','JJS','LS','MD','NN','NNS',
 # WRB: wh-adverb
 
 
-def get_legal_word(sen,LEG):
-    temp = []
+def get_legal_word(sen,LEG): # if word available in legal dictionary then add 
+    temp = []  # in temp
     for k in LEG.keys():
         if k in sen.lower() and k not in temp:
             temp.append(k)
@@ -175,8 +175,8 @@ def compute_summary(args):
             for x in cv:
                 #get_statute_mention(x[0].strip(' \t\n\r'))
                 #sys.exit(0)
-                if len(x[0].split())>4:
-                    LENGTH_SEGMENT+=1
+                if len(x[0].split())>4: # if length of first line is greater than 4 
+                    LENGTH_SEGMENT+=1 # increase length segment
             #NOS[CLASS_INDEX] = NUMBER_OF_SENTENCES
             MAP[CLASS_INDEX] = ck
             if nos!=None :
@@ -196,7 +196,7 @@ def compute_summary(args):
                     All = set()
                     sentence = x[0]
                     L = 0
-                    tokens = x[2]
+                    tokens = x[2]  # iterate over list and extract generated nltk tokens.
                     SEN_TEMP = ''
                     for y in tokens:
                         if y[1] in POS_TAGS:
@@ -235,9 +235,9 @@ def compute_summary(args):
                             TW[index] = All
                             index+=1
                         elif ck=='F':
-                            T[index] = [sentence,content,L,CL_WEIGHT*(1/position),CLASS_INDEX]
-                            TW[index] = All
-                            index+=1
+                            T[index] = [sentence,content,L,CL_WEIGHT*(1/position),CLASS_INDEX] # This statement is used to calculate weight and will be used in 
+                            TW[index] = All  # setting objective function. this weight is used for solving model. T list contains tweet, length, content, score, class
+                            index+=1 
                         elif ck=='S':
                             ST = isStatute(sentence,'current-acts.txt')
                             T[index] = [sentence,content,L,CL_WEIGHT*ST,CLASS_INDEX]
@@ -312,6 +312,13 @@ def set_weight(P,L,U):
     return mod_P
 
 def optimize(tweet,con_weight,ofname,L,CLASS_INDEX,NOS):
+    
+    # Tweet is dictionary key -> value where is integer and values are list 
+    # 0 index - tweet
+    # 1 index - length
+    # 2 index - content
+    # 3 index - score
+    # 4 index - class
 
     ################################ Extract Tweets and Content Words ##############################
     con_word = {}
