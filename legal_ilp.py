@@ -313,7 +313,8 @@ def set_weight(P,L,U):
 
 def optimize(tweet,con_weight,ofname,L,CLASS_INDEX,NOS):
     
-    # Tweet is dictionary key -> value where is integer and values are list 
+    # Tweet is dictionary key -> value: where key is index (integer) and values are list 
+    # tweet variable is mentioned for single line from given judgement
     # 0 index - tweet
     # 1 index - length
     # 2 index - content
@@ -338,14 +339,22 @@ def optimize(tweet,con_weight,ofname,L,CLASS_INDEX,NOS):
         tweet_index+=1
 
     ############################### Make a List of Tweets ###########################################
-    sen = list(tweet_word.keys())
-    sen.sort()
-    entities = list(con_word.keys())
-    print('Length: ',len(sen),len(entities))
+    sen = list(tweet_word.keys()) # keys are index number
+    sen.sort() # index sort ascending order
+    entities = list(con_word.keys()) # con_word is dictionary managed by starting with letter a
+    print('Length: ',len(sen),len(entities)) # Length: sen is number tweet or lines from actual judgement.  95 376
 
     ################### Define the Model #############################################################
 
-    m = Model("sol1")
+    # The Gurobi Optimizer is a mathematical 
+    # optimization software library for 
+    # solving mixed-integer linear and 
+    # quadratic optimization problems. 
+    # Model class is taken from same. 
+    # This is library used for maximize or minimize the solution. 
+
+    m = Model("sol1") # creating a sol1 model. 
+    
 
     ############ First Add tweet variables ############################################################
 
