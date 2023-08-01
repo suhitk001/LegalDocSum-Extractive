@@ -315,7 +315,7 @@ def optimize(tweet,con_weight,ofname,L,CLASS_INDEX,NOS):
     
     # Tweet is dictionary key -> value; where key is index (integer) and values are list 
     # tweet variable is mentioned for single line from given judgement
-    # 0 index - tweet
+    # 0 index - tweet  
     # 1 index - length
     # 2 index - content
     # 3 index - score
